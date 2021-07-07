@@ -3,10 +3,7 @@ package timzmei.exchangeInPictures.service;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import timzmei.exchangeInPictures.client.GiphyClient;
 
@@ -42,11 +39,9 @@ public class GiphyService {
         return null;
     }
 
-
-
     public ResponseEntity getGifResponse(String currencyName) {
 
-        String imageId = (String) calculateMovePrice(currencyName).get("id");
+        String imageId = (String) getGiphyDataResponse(currencyName).get("id");
 
         byte[] gifImage = getImage(imageId);
         HttpHeaders headers = new HttpHeaders();
@@ -55,7 +50,7 @@ public class GiphyService {
         return new ResponseEntity<>(gifImage, headers, HttpStatus.OK);
     }
 
-    private Map<String, Object> calculateMovePrice(String currencyName) {
+    private Map<String, Object> getGiphyDataResponse(String currencyName) {
         boolean resultMovePrice = oxrService.analysisRate(currencyName);
 
         if (resultMovePrice){

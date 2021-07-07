@@ -6,4 +6,4 @@ giphy:
   url: https://api.giphy.com/v1/gifs
   key: du72Uc35y293jr30NMZqJK878cMryIEz
 
-setCurrency: JPY
+setCurrency: RUB
