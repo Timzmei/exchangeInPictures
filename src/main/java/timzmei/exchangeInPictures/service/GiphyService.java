@@ -39,15 +39,10 @@ public class GiphyService {
         return null;
     }
 
-    public ResponseEntity getGifResponse(String currencyName) {
-
+    public byte[] getGifResponse(String currencyName) {
         String imageId = (String) getGiphyDataResponse(currencyName).get("id");
-
         byte[] gifImage = getImage(imageId);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_GIF);
-        headers.setContentLength(gifImage.length);
-        return new ResponseEntity<>(gifImage, headers, HttpStatus.OK);
+        return gifImage;
     }
 
     private Map<String, Object> getGiphyDataResponse(String currencyName) {

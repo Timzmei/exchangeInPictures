@@ -23,19 +23,8 @@ public class OxrService {
 
 
     public boolean analysisRate(String currencyName) {
-        OxrResponse oxrResponse = oxrClient.getCurrentRates(oxrId, currencyName);
-
-        System.out.println(oxrResponse.getBase());
-
-        Map<String, Double> map = oxrResponse.getRates();
-
-        Double curRates = oxrResponse.getRates().get(setCurrency);
+        Double curRates = oxrClient.getCurrentRates(oxrId, currencyName).getRates().get(setCurrency);
         Double pstRates = oxrClient.getPastRates(getYesterdayDate(), oxrId, currencyName).getRates().get(setCurrency);
-
-        System.out.println(map.toString());
-        System.out.println(currencyName + " " + map.get(currencyName));
-        System.out.println(map.get("GBP"));
-        System.out.println(curRates + " " + pstRates + " " + (curRates >= pstRates));
 
         return (curRates >= pstRates);
     }
