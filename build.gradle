@@ -4,14 +4,35 @@ plugins {
 	id 'java'
 }
 
+
+
 group = 'timzmei'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+}
+
+bootJar {
+	baseName "exchange_in_pictures"
+	launchScript()
+}
+
+springBoot {
+	buildInfo {
+		properties {
+			group = "groupName"
+			name = "projectName"
+			version = "1.0"
+		}
+	}
+}
+
+tasks.named("bootBuildImage") {
+	imageName = "exchange_in_pictures-${version}"
 }
 
 repositories {
